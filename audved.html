@@ -1,0 +1,128 @@
+
+<html>
+<head>
+<style>
+
+ul {background-color:rgba(333,3,22,.1);color:green;}
+body{padding:30px;margin-left:50px}
+
+</style>
+<meta name="viewport "  content="width=device-width">
+</head>
+<body>
+this page has a body padding of 30px and margin-left of 50px i.e.(50-30)<br>
+<button onclick=vedioplaypause()>
+play/pause vedio
+</button>
+
+	<button onclick=mute()>
+	mute
+	</button>
+
+<button onclick=small()>
+small
+</button>
+
+<br>
+
+<video  src ="vedio.mp4" width=40% id="vid" controls>
+<source src = "vedio.mp4">
+</video>
+	<span title='<video  src ="vedio.mp4" width=40% id="vid" controls>
+	<source src = "vedio.mp4">
+	</video>'>code</span>
+
+<video src="ved2.mp4" autoplay muted width=40% >
+</video>
+	<span title='<video src="ved2.mp4" autoplay muted width=40% >
+	</video>'>code</span>
+
+<br>
+<ul style="list-style-type:circle">
+<li>video element or vedio tags are use to insert a video</li><br>
+<li>src attribute of vedio tags gives the url or file path</li><br>
+<li>set width or height for vedio (can use style attribute)</li><br>
+<li>controls attribute is used to make controls in a vedio</li><br>
+<li>autoplay & muted attributes can also be used without value in vdio element</li><br>
+<li>here the vedio1 has an id set to vid for use in functions</li><br>
+</ul> 
+
+
+<script>
+
+var vid1 = document.getElementById('vid');
+
+	function small()
+	{vid1.width();
+
+	}
+
+	function mute()
+	{
+  	vid1.volume=0;
+	}
+
+	function vedioplaypause()
+	{
+		if(vid1.paused)
+  		{vid1.play();}
+		else
+  		{vid1.pause();}
+	}
+
+</script>
+
+
+
+<p title="
+	<button onclick=vedioplaypause()>
+	play/pause vedio
+	</button>
+
+	<button onclick=mute()>
+	mute
+	</button>
+
+	<button onclick=small()>
+	small
+	</button>">
+buttons code java scripted
+</p>
+
+<pre>
+(script tags)
+var vid1 = document.getElementById('vid');
+
+	function small()
+	{
+
+	}
+
+	function mute()
+	{
+  	vid1.volume=0;
+	}
+
+	function vedioplaypause()
+	{
+		if(vid1.paused)
+  		{vid1.play();}
+		else
+  		{vid1.pause();}
+	}
+</pre>
+
+
+
+<br>
+<br>
+<br>
+
+<iframe src="https://youtu.be/tcjDtvc5tEY" style="width:50%"s></iframe>
+<p title='<iframe src="https://youtu.be/tcjDtvc5tEY" style="width:50%"s></iframe>' >  Youtube Vedio in iframe <br>code  </p>
+
+<audio controls src="crickets.mp3">this is a audio</audio>
+<p title='<audio controls src="audioname.mp3">  </audio>' > code  </p>
+
+</body>
+</html>

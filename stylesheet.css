@@ -1,0 +1,22 @@
+body {
+background-color:red;
+}
+
+h1{ color:yellow;
+font-family:arial;
+font-size:60px;
+background-color:green;
+text-align:center;
+border:20px solid gray;
+
+}
+
+
+p{ color:blue;
+font-family:tahoma;
+font-size:30px;
+background-color:white;
+font-style:italic;
+
+}
+

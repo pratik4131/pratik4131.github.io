@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta name="viewport "  content="width=device-width">
+<link rel="stylesheet"
+href ="stylesheet.css">
+<style>
+a:link{text-decoration:none;background-color:yellow;color:blue;}
+a:active{color:green;}
+a:visited{color:black;background-color:pink;}
+a:hover{color:red;background-color:white;}
+</style>
+</head>
+<body>
+<h1> Cascade style sheet</h1>
+<p> this is new page the paragraph for check</p>
+<hr>
+<a href=#idforlink
+title= "created using bookmark i.e. <a href=#idname>
+further used <h1 id=idname> to go there " 
+style="float:right;">Go To chapter 2 ,down the page</a>
+<p> 
+This web Page is linked with css [cascading style sheets]</p> <br>
+<p>This .css extention sheets are used to create multiple web pages using a common design for their body,paragraph and headings
+<br>the below is the code to create a css sheet it uses style attributes
+</p>
+<hr>
+This is a style sheet saved with .css extention
+<p>
+
+body {
+background-color:red;
+}
+<br>
+h1{ color:yellow;
+font-family:arial;
+font-size:60px;
+background-color:green;
+text-align:center;
+border:20px solid gray;
+<br>
+}
+
+<br>
+p{ color:blue;
+font-family:tahoma;
+font-size:30px;
+background-color:white;
+font-style:italic;
+
+}</p>
+<hr>
+to link this style sheet use
+<p>
+[link rel="stylesheet" href=" set path of your stylesheet"],here name ie (stylesheet.css) is used <br>
+ this has to be used in head section of your current webpage
+</p><hr>
+<h1>ImAge Map</h1>
+image map is created using 
+<b>usemap="#map name"</b> atrribute in the img src<br>
+map is created using<u> map tags </u>;<br>map takes name attribute 
+which specifies map name <b>name="map name"</b><br>
+within map tags use <i>area element with </i><b>shape attribute</b> set to <b>
+="poly" or "rect" or "circle"</b> use <b>coords attribute</b> in area and specify all <br>
+coordinates in pair "x,y,x,y,x.." at last use<b> href attribute</b> in area
+and specify file path or url <br>
+u can use as many area element in maps as required and that's it
+<p title = '<map name ="forestmap">
+<area shape = "poly"
+coords="559,335,
+427,320,
+412,304,
+431,275,
+459,238,
+479,206,
+501,200,
+522,250,
+542,280,
+540,291,
+594,310,
+523,325,
+511,335,
+419,328"
+href="https://en.m.wikipedia.org/wiki/Monkey">
+<area shape ="rect"
+coords="100,300,300,335"
+href="https://en.m.wikipedia.org/wiki/link.....">
+<area shape ="circle"
+coords="130,230,25"
+href="">
+<area shape="poly"
+coords="250,270,370,270,370,235,310,200"
+href= "www.google.com">
+</map>
+<img src="forest.jpg" usemap="#forestmap" width=610px height=456px>'>
+example</p>
+
+<map name ="forestmap">
+<area shape = "poly"
+coords="559,335,
+427,320,
+412,304,
+431,275,
+459,238,
+479,206,
+501,200,
+522,250,
+542,280,
+540,291,
+594,310,
+523,325,
+511,335,
+419,328"
+href="https://en.m.wikipedia.org/wiki/Monkey">
+<area shape ="rect"
+coords="100,300,300,335"
+href="https://image.app.goo.gl/7c2PKcFMB2ygxNVs8">
+<area shape ="rect"
+coords="400,245,455,182"
+href="https://image.app.goo.gl/xnhm4c1y8LewBoRN7">
+<area shape ="circle"
+coords="130,230,25"
+href="https://www.google.com/search?h1=en&q=White-tailed%20deer">
+<area shape="poly"
+coords="250,270,370,270,370,235,310,200"
+href= "https://www.google.com/search?h1=en&q=White-tailed%20deer">
+</map>
+
+<img src="forest.jpg" usemap="#forestmap" width=610px height=456px><hr>
+<h1 id=idforlink >chapter 2 : active,hover,visited LINK </h1>
+<a href ="ab.html"><b>Back(previous page)</a>
+<a href ="table.html" 
+title="<style>
+a:link{text-decoration:none;background-color:yellow;color:blue;}
+a:active{color:green;}
+a:visited{color:black;background-color:pink;}
+a:hover{color:red;background-color:white;}
+</style>"><b>html table</b> (next page)</a><br>
+text-decoration can be set to none ,underline,etc .(none removes underline )
+</body>
+</html>

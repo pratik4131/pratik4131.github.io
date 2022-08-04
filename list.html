@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport "  content="width=device-width">
+<style>
+
+#id1{background-color:rgba(0,330,3,0.2);font-size:20px}
+
+.a1{background-color:yellow;font-size:20px}
+
+ul{background-color:#333333;list-style-type:none;padding:1px;margin:30px;overflow:auto}
+
+li a {text-decoration:none;color:white;display:block;text-align:center;padding:10px;margin-left:90px;margin-right:120px}
+
+li a:hover{background-color:#111111;}
+
+li{float:left;}
+
+h1{color:orange;background-color:rgba(11,21,333,.2);}
+
+</style>
+</head>
+
+<body>
+<ul >
+
+	<li><a href = #link>&nbsp &nbsp  LINK A  </a></li>
+	<li><a href = #link> LINK B </a></li>
+	<li><a href = #link> LINK C </a> </li>
+	<li><a href =#link> LINK D &nbsp </a></li>	
+</ul>
+
+
+<p title='<!DOCTYPE html>
+<head>
+<style>
+
+ul{background-color:#333333;list-style-type:none;padding:1px;margin:30px;overflow:auto}
+
+li a {text-decoration:none;color:white;display:block;text-align:center;padding:10px;margin-left:90px;margin-right:120px}
+
+li a:hover{background-color:#111111;}
+
+li{float:left;}
+
+
+</style>
+</head>
+
+<body>
+<ul >
+
+	<li><a href = #link>&nbsp &nbsp  LINK A  </a></li>
+	<li><a href = #link> LINK B </a></li>
+	<li><a href = #link> LINK C </a> </li>
+	<li><a href =#link> LINK D &nbsp </a></li>	
+</ul>'>
+<mark>code for tis</mark> curser here(not meant for android required mouse)
+key points
+<ol type="i">
+<li>the <b>list-style-type:value </b> is used to set the style of list to cirle or disc or none </li><br>
+<li> the<b> text decoration:value </b> can be set as none or underlined for the links</li><br>
+<li><b>li a{} </b>is used in the style tags as link was created inside the list</li><br>
+<li>display:block    is used to make a rectangular block covering the line for the link so that it can be aligned</li><br>
+<li>margin for ul is set with respect to the page, padding is set with respect to rectangular block of ul for all li contents of ul</li><br>
+<li>left,rite,margin and padding for [li a] is set wrto the li in which [li a] lies... </li>
+</ol>
+<hr>
+
+
+
+
+
+
+
+<h1>inline and block elements/tags</h1>
+<h3>inline elements(continue in a line)<br></h3>
+<img># img<br>
+<a> # a<br>
+ #span <span title="<span> this tag is used to span or add text between a line </span>">[curser here]</span> cuurser here is spanned with a title attribute applied to it<br><br>
+<h3>block elemnts(takes a new line after a line break,and starts from a new line)<br></h3>
+<p># p paragraph element
+<div title="<div> this is same as a paragraph element</div>"># division element (same as a paragraph element but can take a few attributes like style)</div>
+
+
+
+
+
+
+<h1>iframe</h1>
+&rarr; iframe tags are used used to create a web page inside a this web page<br>
+&rarr; it is inline tags<br>
+&rarr; it has src attribute to specify url of webpage to be displayed<br>
+&rarr; it has style attribute to add width,height, border parameters for imbeded webpage<br>
+&rarr; it has name attribute which gives a name to the iframe so that it can be assesed by any other link with its target attribute<br>
+<br>
+
+<iframe src ="ab.html" name="iframe" align="center" style="width:500px;height:500px;border:none;"></iframe>
+<div style="float:left">
+this link will change the iframe of the current page
+<a href="noname.html" target="iframe">Change Iframe</a> &nbsp &nbsp &nbsp<br>{it uses target attribute to target the link to the iframe via its name}
+</div>
+
+<p title='<iframe src ="ab.html"  name="iframe" style="width:400px;height:500px;border:none;">'>
+code for this iframe here</p>
+<p title='<a href="noname.html" target="iframe">Change Iframe</a><br>'>code for the [change frame] link here</p>
+
+
+
+
+
+
+<h1>java script in html</h1>
+
+<p title='<script>
+function function1()
+{document.getElementById("magic").innerHTML="THis is changed"}
+</script>'>
+
+&spades; use script tags to write script <br>
+&spades; function is use to create the function of name function1()<br>
+&spades; document.getElementById("idhere") is used to get the element with its id<br>
+&spades; innerHTML changes the documents or text inside the element with that perticular id<br>
+
+
+</p>
+
+<script>
+function function1()
+{document.getElementById("magic").innerHTML="THis is changed"}
+</script>
+
+<p id ="magic" title='this paragraph has an id="magic" attribute'>it will be changed</p>
+
+<button onclick=function1()   title="onclick=function1()">
+press this buttton 1
+</button>
+
+<button onclick=function3();function2()   title="onclick=function2();function3()">
+press this buttton 2
+</button>
+
+<p title='<button onclick=function3();function2()
+<hr>
+function function2()
+{document.getElementById("colr").style.color="red";
+document.getElementById("colr").style.fontSize="30px";}'>
+
+a button can take more then 1 function<br>
+and a function can take more then one parameter
+</p>
+
+
+<script>
+
+function function3()
+{document.getElementById("magic").innerHTML="it will be changed";
+}
+
+function function2()
+{document.getElementById("colr").style.color="red";
+document.getElementById("colr").style.fontSize="30px";}
+</script>
+<p id="colr" title='this paragraph has id="colr" attribute'>change color from black to red</p>
+
+<p 
+title=
+'<img src ="lightoff.jpg" style=" width:300px ; height:300px" id="img11">
+<script>
+function bulb(state)
+{
+if(state==0)
+{document.getElementById("img11").src="lighton.jpg";
+}
+else
+{
+document.getElementById("img11").src="lightoff.jpg";
+}
+}
+</script>
+<button onclick=bulb(0)>
+bulb on
+</button>
+
+<button onclick=bulb(1)>
+bulb off
+</button>' style ="float:right"> code </p>
+
+
+<img src ="lightoff.jpg" style=" width:300px ; height:300px" id="img11">
+<script>
+function bulb(state)
+{
+if(state==0)
+{document.getElementById("img11").src="lighton.jpg";
+}
+else
+{
+document.getElementById("img11").src="lightoff.jpg";
+}
+}
+</script>
+<button onclick=bulb(0)>
+bulb on
+</button>
+
+<button onclick=bulb(1)>
+bulb off
+</button>
+
+
+
+<h1>class and id</h1>
+
+<p title='<style>
+.a1{background-color:yellow;font-size:20px}
+.
+.
+</style>'>
+
+<b>use the .classname to create a class in head-style [here class .a1 is created]</b></p><br>
+ and use all style attributes for it , like if its a [ ul,li or a table]
+
+<br><br>
+<div title = '<p class = "a1">text here</p>
+<h4 class = "a1">text here</h4>'>
+
+<b>now access the class a1 or for any paragraph or heading by using class attribute in it</b>
+</div>
+
+<p class = "a1">this paragraph follows the a1 class created in head</p>
+<h4 class = "a1">this h4 heading follows the a1 class created in head</h4>
+
+
+<p title='<style>
+.a1{background-color:yellow;font-size:20px}
+#id1{background-color:rgba(0,300,3,.3);font-sixe:20px}
+.
+</style>'>
+<b>to create id use #idname followed by curly braces and specify styles in head</b></p>
+
+<p title='<p id="id1">text here</p>'>
+<b>to access id for the element, use id attribute followeed by id name </b>
+</p>
+
+<p id="id1">this paragraph follows id1 created in the head </p>
+<table>
+<tr>
+<th>id</td>
+<th>class</th> 
+</tr>
+<tr  style=" background-color:rgba(11,222,22,.2)">
+<td style= "padding:20px;border:1px solid black;">id is unique for every element or tags,<br>no other element can share same id </td>
+<td style= "padding:20px;border:1px solid black;">a class can be used by two or more different elements <br>to share common feathers or styles created in class
+<br>you can use class for two different looking tables(of different styles) on a same web page </th> 
+</tr>
+</table>
+<button onclick="document.location='table5.html'" style="background-color:red;color:white">
+Previous Page
+</button>
+</body>
+<button onclick="document.location='hfanv.html'" style="background-color:green;color:white">
+Next Page
+</button>
+
+
+</body>
+</html>
+
+
+

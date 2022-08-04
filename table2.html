@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta name="viewport "  content="width=device-width">
+<style>
+table{width:50%;height:30%}
+table,th,td{ border:1px solid red;border-collapse:collapse;}
+tr:nth-child(even){background-color:rgba(49,80,100,0.4)}
+</style>
+
+<table>
+<tr>
+<th title="<style>
+table{width:50%;height:30%}
+</style>
+
+table has no height for style attribute but here it worked">table width</th>
+<th title="<style>
+table,th,td{ border:1px solid red;border-collapse:collapse;}
+</style>">table border collapse</th>
+<th>cell3</th>
+<th>cello</th>
+</tr>
+<tr>
+<td>cell4</td>
+<td>cell5</td>
+<td>cell6</td>
+<td rowspan=3 title="this cell is rowspan (using = <td rowspan=3>)">rowspan</td>
+</tr>
+<tr>
+<td>cell7</td>
+<td title="<style>
+tr:nth-child(even){background-color:colorname}
+</style">table row alternet color</td>
+<td>cell9</td>
+</tr>
+<td>cell10</th>
+<td>cell11</th>
+<td>cell12</th>
+</tr>
+<tr>
+<td colspan=2 title="this cell is colspan (using = <td colspan=2>)">colspan</td>
+<td>cell16</td>
+</tr>
+<tr>
+<td>cell17</td>
+<td>cell18</td>
+<td>cell19</td>
+</tr>
+</table>
+here style tag is used once in the head section of this page to set the style for this table
+<br> whereas colspan and rowspan is used in the th/td tags of respected cell
+<br><br>
+<p style="background-image:url('imgp.jpg');background-attachment:fixed;background-size:fixed;">This paragraph is created with a 
+<br>background image set using <b>background-image:url('imgp.jpg')</b> and<br> the image is set to cover the entire paragraph element by <br><b>background-size:cover</b>
+also the image used is set fixed <br>with respect to the text by using<br> <b>background-attachment:fixed
+</b><br>
+<br>
+<br>
+<br>
+<br>
+<br>the blank lines above are created using br tag , 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>the blank lines above are created using br tag , 
+<br>
+<br>
+<br>
+<br>
+<br></p>
+<button onclick="document.location='table.html'" style="background-color:skyblue ;border-radius:20px;"><p style="font-size:20px; color:gray;" 
+title='<button onclick="document.location=set path for button in single quate" 
+style="background-color:skyblue ;
+border-radius:20px;">
+<p style="font-size:20px; color:gray;" >
+TEXT of button Here 
+</button>'>
+Previous Table</p></button>
+<button onclick="document.location='tablle3.html'" style="background-color:yellow ;border-radius:20px;"><p style="font-size:20px; color:red;" >Next Table</p></button>
+
+
+</body>
+<html>
