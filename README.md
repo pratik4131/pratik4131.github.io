@@ -1,3 +1,4 @@
 # pratik4131
-Htm <html> <body> <button onclick="document.location='ab.html'"> HTML PAGES </button></body></html>
+Htm 
+ <button onclick="document.location='ab.html'"> HTML PAGES </button>
 * View in PC/Laptop
