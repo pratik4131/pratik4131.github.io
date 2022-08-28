@@ -1,16 +1,44 @@
+<html>
 <head>
-<meta name ="viewport" content=" width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<style>
+html,body{height:100%;}
+.pstatic{position:static;}
+.prelative{position:relative;left:30px;}
+.pabsolute{position:absolute;bottom:0px;}
+.pfixed{position:fixed;}
+.psticky{position:sticky;top:0px;}
+*{box-sizing:border-box;}
+.menu{background-color:black;}
+.left{ background-color:green; }
+.middle{ background-color:blue;}
+.right{ background-color:yellow;}
+.hidden{float :left;display:block;}
+@media screen and (min-width:500px){
+.left{float:left;width:30% }
+ .middle { float:left;font-size:40px; margin:0px ;padding: 40px;width:50%;} 
+.right{float:left;width:20%; margin:0px; padding: 40px } .hidden{display:none;}}
+</style>
 </head>
+<body style="background-image:url('background.jpg');background-repeat:x-repeat;background-size:20% 100%;">
 
-<h3>Responsive web wages</h3><br>
+<p class="left" >@media screen and(min-width:500px){pass all classes here ,adjusting to the media screen type}
 
-The web pages we have created till now fit's
-PC / laptop screens<br>
-Responsive web pages can resize like spring
-And are suitable for any devices<br><br>
+<p class="middle"><
+@media screen and(max-width:800px){the styles of classes here will be applied for devices upto screen size 800px}
+<p class="right"style="text-transform:uppercase;text-indent:40px;letter-spacing:2px;word-spacing:9px;text-align:justify;">
+this is a responsive web page
+<span class="hidden right">open in desktop site to view its effect from android / resize browser screen to see effect</span>
+</p>
+<div class="pstatic" style="clear:left;background-color:pink;opacity:0.3;">css style position:static postion the element to default unaffected by top left bottom right etc</div>
+<div class="prelative" style="background-color:orange;width:50%;opacity:0.2;"> position:relative set the position relative to normal position (here left:30px; width:50px)</div>
+<div class="pabsolute" style="background-color:#777999;">position:absolute sets the position relative to parent /if no parent then relative to body , works only if top , left etc are provided</div>
+<div class="pfixed" style="z-index:1;background-color:#888;">position:fixed sets the fixed position to a viewport unaffected by scrolls</div>
+<div class="psticky" style="background-color:#555;">position:sticky sets element position relative initially then fix the position (unaffected by scroll)</div>
+<p style="height:2000px" >
 
-Coming soon!
-
-<button onclick= "document.location='audved.html'">
-Go Back
-</button>
+</p><br>
+&#xf0c9;
+</body>
+</htm
