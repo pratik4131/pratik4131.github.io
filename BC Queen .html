@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BC QUEEN's WHEEL</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Roboto&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Roboto&family=Oswald:wght@400;700&display=swap">
+   
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      background-color: black;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    #headingContainer {
+        background-color: rgba(128, 128, 128, 0.3); /* Gray template background */
+        padding: 1vw;
+        margin: 2vw auto; /* Add margin to the top */
+        border-radius: 1vw;
+        width: 100%; /* Cover 100% of screen width */
+        max-width: none; /* Remove max width limit */
+        box-shadow: 0.2vw 0.3vw 0.5vw rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif; /* Use Google Font */
+        font-size: 5vw; /* Increased font size */
+        color: #fff;
+        margin: 0;
+        padding: 0.5em 0;
+        text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.8); /* Stronger shadow for readability */
+    }
+
+
+    /* Container for the wheel and button in landscape */
+    #mainContainer {
+      display: flex;
+      flex-direction: column; /* Default to column in portrait */
+      align-items: center;
+    }
+
+    #wheelContainer {
+      position: relative;
+      width: 95vw;
+      height: 95vw;
+      max-width: 95vh;
+      max-height: 95vh;
+      margin: 10px auto;
+    }
+
+    #wheelCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #buttonPlate {
+      width: 100vw;
+      background-color: gray;
+      padding: 5vw 0;
+      margin-top: 2vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #spinButton {
+      padding: 6vw 12vw;
+      font-size: 4vw;
+      cursor: pointer;
+      margin-top: 5vw;
+      background-color: white;
+      color: #333;
+      border: none;
+      border-radius: 8vw;
+      box-shadow: 0.8vw 1.4vw 2vw rgba(0, 0, 0, 0.7);
+      transition: transform 0.1s ease, background-color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #spinButton:hover {
+      transform: translateY(-0.8vw);
+    }
+
+    #spinButton:active {
+      background-color: #ddd;
+      transform: translateY(0);
+      box-shadow: 0.5vw 0.8vw 1.2vw rgba(0, 0, 0, 0.7);
+    }
+
+
+
+    /* Styles for the original template */
+   #winnerTemplate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 10; /* Ensure it's on top */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+  font-family: 'Oswald', sans-serif; /* Apply Oswald to the entire template */
+  /*border: 0.3vw solid rgba(255, 102, 102, 0.7);   Light red border */
+  border-radius: 2vw; /* Curved corners */
+}
+
+#winnerTemplate::before,
+#winnerTemplate::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 5vw; /* Thickness of the red bars */
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.7); /* Semi-transparent red */
+  z-index: -1; /* Place behind the text */
+}
+
+#winnerTemplate::before {
+  left: 0;
+}
+
+#winnerTemplate::after {
+  right: 0;
+}
+  
+    #winnerTemplate .winnerTitle {
+      font-size: 3em; /* Larger title */
+      font-weight: bold;
+      margin-bottom: 0.5em; /* Space between title and name */
+    }
+
+    #winnerTemplate .winnerName {
+      font-size: 4em; /* Even larger name */
+      /* Add some flair */
+    }
+
+    #winnerTemplate.show {
+      opacity: 1;
+    }
+
+
+    /* Styles for the new template */
+    #newWinnerTemplate {
+  background-color: #222; /* Dark background */
+  border-radius: 1vw;
+  padding: 2vw;
+  margin-top: 2vw;
+  box-shadow: 0.4vw 0.6vw 1vw rgba(0, 0, 0, 0.5);
+  display: none; /* Hidden by default */
+  transition: opacity 0.5s ease-in-out; /* Fade transition */
+  font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+}
+
+#newWinnerTemplate.show {
+  display: block; /* Show the template */
+}
+
+#newWinnerTemplate .winnerTitle {
+  color: #fff; /* White text color */
+  font-size: 2.2em; /* Slightly larger title */
+  margin-bottom: 0.5em;
+  background-color: #333; /* Slightly lighter background */
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
+    font-weight: bold;
+}
+
+#newWinnerTemplate .winnerName {
+  color: #fff; /* White winner name */
+  font-size: 3.5em; /* Larger name */
+  font-weight: bold;
+  background-color: #444; /* Slightly lighter background */
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
+}
+
+      /* Style for the name list container */
+    #nameListContainer {
+      width: 95vw; /* Take up most of the screen width */
+      margin: 2vw auto; /* Center the container */
+      padding: 1vw;
+      background-color: #222; /* Slightly darker background */
+      border-radius: 1vw;
+        display: flex;  /* Use flexbox for left/right columns */
+        justify-content: space-around;
+        align-items: flex-start; /* Align to the top */
+      box-shadow: 0.2vw 0.3vw 0.5vw rgba(0, 0, 0, 0.5);
+    }
+  
+  .spinning-hide {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+    /* Style for individual name items */
+    .nameItem {
+      background-color: #444;
+      color: white;
+      padding: 2vw; /* Increased padding */
+      margin: 1vw 0;
+      border-radius: 0.7vw;
+      display: flex;
+      justify-content: space-between; /* Distribute space between name and buttons */
+      align-items: center;
+      font-size: 3vw; /* Increased font size */
+        min-height: 6vw; /* Set a minimum height */
+    }
+
+   /* Style for name columns (left and right) */
+    .nameColumn {
+        width: 45%; /* Take up almost half the container width */
+    }
+
+
+    .nameItem button {
+      padding: 1.2vw 2vw; /* Increased padding */
+      font-size: 2.5vw; /* Increased font size */
+      cursor: pointer;
+      border: none;
+      border-radius: 0.5vw;
+      margin-left: 1vw;
+    }
+
+
+    .nameItem .removeButton {
+      background-color: #f44336;
+      color: white;
+    }
+     #addNameListContainer {
+        width: 95vw;
+        margin: 2vw auto;
+        padding: 1vw;
+        background-color: #222; /* Slightly darker background */
+        border-radius: 1vw;
+        box-shadow: 0.2vw 0.3vw 0.5vw rgba(0, 0, 0, 0.5);
+        text-align: left;
+    }
+
+    .addNameItem {
+        background-color: #444;
+        color: white;
+        padding: 2vw; /* Increased padding */
+        margin: 1vw 0;
+        border-radius: 0.7vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 3vw; /* Increased font size */
+        min-height: 6vw; /* Set a minimum height */
+    }
+
+    .addNameItem button {
+        padding: 1.2vw 2vw; /* Increased padding */
+        font-size: 2.5vw; /* Increased font size */
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5vw;
+        margin-left: 1vw;
+        background-color: #4CAF50;
+        color: white;
+    }
+
+
+    /* Media query for landscape orientation */
+    @media screen and (orientation: landscape) {
+      #mainContainer {
+        flex-direction: row; /* Change to row in landscape */
+        justify-content: space-around; /* Distribute space evenly */
+        align-items: center; /* Align items vertically */
+      }
+
+      #wheelContainer {
+        width: 45vw; /* Reduced width for the wheel in landscape */
+        height: 45vw; /* Reduced height for the wheel in landscape */
+        max-width: none; /* Remove max-height limitation */
+        max-height: none; /* Remove max-height limitation */
+      }
+
+      #buttonPlate {
+        width: 45vw; /* Reduced width for the button plate in landscape */
+        margin-top: 0; /* Remove top margin */
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- All code used in all the functionalities-->
+  <div id="headingContainer">
+      <!-- Changed heading text -->
+      <h1>BC QUEEN's WHEEL</h1>
+  </div>
+
+  <audio id="spinSound" src="spinsound1.mp3" preload="auto"></audio>
+  <audio id="deleteSound" src="deletesound.mp3" preload="auto"></audio>
+  <audio id="addSound" src="addsound.mp3" preload="auto"></audio>
+
+  <div id="mainContainer">
+    <div id="wheelContainer">
+      <canvas id="wheelCanvas"></canvas>
+      <div id="winnerTemplate">
+        <div class="winnerTitle">Winner</div>
+        <div class="winnerName"></div>
+      </div>
+    </div>
+
+    <!-- Rectangular plate with the spin button -->
+    <div id="buttonPlate">
+      <button id="spinButton">Spin!</button>
+    </div>
+  </div>
+
+    <div id="newWinnerTemplate">
+        <div class="winnerTitle">Winner:</div>
+        <div class="winnerName"></div>
+    </div>
+
+    <div id="nameListContainer">
+          <div class="nameColumn" id="leftNameColumn"></div>
+          <div class="nameColumn" id="rightNameColumn"></div>
+       </div>
+
+       <hr style="border: 0.1vw solid gray; width: 95vw; margin: 2vw auto;">
+        <div id="addNameListContainer"></div>
+ <!--- REMOVED THE SPAN-->
+
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+  <script>
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const spinButton = document.getElementById('spinButton');
+    const winnerDiv = document.getElementById('winner');
+    const winnerTemplate = document.getElementById('winnerTemplate');
+    const newWinnerTemplate = document.getElementById('newWinnerTemplate');
+    const nameListContainer = document.getElementById('nameListContainer');
+    const leftNameColumn = document.getElementById('leftNameColumn');
+    const rightNameColumn = document.getElementById('rightNameColumn');
+    const addNameListContainer = document.getElementById('addNameListContainer');
+    const spinSound = document.getElementById('spinSound');
+    const deleteSound = document.getElementById('deleteSound');
+    const addSound = document.getElementById('addSound');
+
+    const jsConfetti = new JSConfetti()  // Initialize js-confetti
+
+    // Hardcoded list of names
+    const names = [
+      "Kiran Jain",
+      "Rakhi Agrawal",
+      "Sonal Jain",
+      "Shital Chhepa",
+      "Bhavna Tiwali",
+      "Ranjana Raikhede", // Changed name
+      "Ritu Mandloi",
+      "Rani Namdev",
+      "Ranjana Namdev",
+      "Kavita Kushwah",
+      "Sarita Paliwal",
+      "Ranu",
+      "Chetna Patil",
+      "Shriji Soni"
+    ];
+    let deletedNames = []; // Array to store deleted names
+
+    let segments = [];
+    let rotationAngle = 0;
+    let spinning = false;
+    let highlightedSegment = null; // To store the index of the highlighted segment
+
+    // Initialize the wheel segments
+    function initializeWheel() {
+        segments = names.map((name, index) => ({
+            name: name,
+            color: getRandomBrightColor(), // Function to generate random bright colors
+            angle: (2 * Math.PI) / names.length,
+            startAngle: (index * 2 * Math.PI) / names.length
+        }));
+        drawWheel(); // Draw the wheel initially
+        populateNameList();
+
+    }
+
+    function playSpinSound() {
+      try {
+        spinSound.currentTime = 0; // Reset the sound to the beginning
+        spinSound.play();
+      } catch (error) {
+        console.error("Error playing spin sound:", error);
+      }
+    }
+
+    function playDeleteSound() {
+      try {
+        deleteSound.currentTime = 0;
+        deleteSound.play();
+      } catch (error) {
+        console.error("Error playing delete sound:", error);
+      }
+    }
+
+    function playAddSound() {
+      try {
+        addSound.currentTime = 0;
+        addSound.play();
+      } catch (error) {
+        console.error("Error playing add sound:", error);
+      }
+    }
+
+
+   function populateNameList() {
+       leftNameColumn.innerHTML = ''; // Clear existing content
+       rightNameColumn.innerHTML = '';
+         //addNameListContainer.innerHTML = '';
+       const midPoint = Math.ceil(names.length / 2);  //find mid point so that it divides evenly
+
+        for (let i = 0, len = names.length; i < len; i++) { //Added len for performance
+            const nameItem = document.createElement('div');
+            nameItem.classList.add('nameItem');
+            nameItem.textContent = names[i];
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('removeButton');
+            removeButton.textContent = 'Delete'; // Changed text
+                removeButton.dataset.name = names[i];  // Store the name on the button
+                removeButton.addEventListener('click', function() {
+                    const nameToRemove = this.dataset.name;
+                    removeName(nameToRemove);
+                });
+
+
+            nameItem.appendChild(removeButton);
+
+            if (i < midPoint) {
+                leftNameColumn.appendChild(nameItem);
+            } else {
+                rightNameColumn.appendChild(nameItem);
+            }
+        }
+    }
+
+
+  function createAddNameTemplate(name) {
+        const addNameItem = document.createElement('div');
+        addNameItem.classList.add('addNameItem');
+        addNameItem.textContent = name;
+
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add';
+        addButton.dataset.name = name;
+        addButton.addEventListener('click', function() {
+            const nameToAdd = this.dataset.name;
+            addName(nameToAdd);
+            playAddSound();
+        });
+
+        addNameItem.appendChild(addButton);
+        addNameListContainer.appendChild(addNameItem);
+    }
+
+
+  function removeName(nameToRemove) {
+
+      playDeleteSound();  // Play delete sound
+
+      const index = names.indexOf(nameToRemove);
+      if (index > -1) {
+          names.splice(index, 1);
+          deletedNames.push(nameToRemove); //store deleted name
+
+          highlightedSegment = null; // Clear the highlighted segment
+
+          updateSegments();
+          drawWheel();
+          populateNameList();
+          updateAddNameList();
+
+
+      }
+    }
+
+  function addName(nameToAdd) {
+        const index = names.indexOf(nameToAdd);
+        if (index === -1) {
+            names.push(nameToAdd);
+
+            let delIndex = deletedNames.indexOf(nameToAdd);
+            if (delIndex > -1) {
+              deletedNames.splice(delIndex, 1);
+            }
+
+            updateSegments();
+            drawWheel();
+            populateNameList();
+            updateAddNameList();
+
+            //remove the addTemplate item
+            const addNameItems = addNameListContainer.querySelectorAll('.addNameItem');
+            addNameItems.forEach(item => {
+              if (item.textContent === nameToAdd) {
+                item.remove();
+              }
+            });
+        }
+    }
+
+ function updateAddNameList() {
+        addNameListContainer.innerHTML = ''; // Clear existing content
+        deletedNames.forEach(name => {
+            const addNameItem = document.createElement('div');
+            addNameItem.classList.add('addNameItem');
+            addNameItem.textContent = name;
+
+            const addButton = document.createElement('button');
+            addButton.textContent = 'Add';
+            addButton.dataset.name = name;
+            addButton.addEventListener('click', function() {
+                const nameToAdd = this.dataset.name;
+                addName(nameToAdd);
+                 playAddSound();
+            });
+
+            addNameItem.appendChild(addButton);
+            addNameListContainer.appendChild(addNameItem);
+        });
+    }
+
+    function updateSegments() {
+        segments = names.map((name, index) => ({
+            name: name,
+            color: getRandomBrightColor(), // Function to generate random bright colors
+            angle: (2 * Math.PI) / names.length,
+            startAngle: (index * 2 * Math.PI) / names.length
+        }));
+    }
+
+    function getRandomBrightColor() {
+      // Generate bright, distinguishable colors
+      const hue = Math.floor(Math.random() * 360); // Random hue
+      const saturation = 70 + Math.floor(Math.random() * 30);   // High Saturation (70-100%)
+      const lightness = 50 + Math.floor(Math.random() * 30);    // Moderate Lightness (50-80%)
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+
+
+ function drawWheel(rotationOffset = 0) {
+      // Resize the canvas to fit the container
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = Math.min(centerX, centerY) * 0.8;
+      const innerRadius = radius * 0.3; // Radius of the inner white disk
+      const textRadius = radius * 0.65; // Distance of the text from the center (adjust this)
+      const liftAmount = 20; // Amount to extend the highlighted segment
+      ctx.font = `${Math.max(10, radius / 15)}px Arial`; // Adjust font size based on wheel size (reduced minimum size)
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
+      segments.forEach((segment, index) => {
+          ctx.beginPath();
+          ctx.save(); // Save the current transformation matrix
+
+          let segmentRadius = radius; // Default segment radius
+
+          // Extend the highlighted segment
+          if (highlightedSegment === index) {
+              segmentRadius = radius + liftAmount;
+          }
+
+          ctx.moveTo(centerX, centerY);
+          ctx.arc(centerX, centerY, segmentRadius, segment.startAngle + rotationOffset, segment.startAngle + segment.angle + rotationOffset);
+          ctx.closePath();
+          ctx.fillStyle = segment.color;
+          ctx.fill();
+          ctx.stroke();
+
+          // Draw the name label
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          ctx.rotate(segment.startAngle + segment.angle / 2 + rotationOffset);
+          ctx.fillStyle = 'black';
+          ctx.textAlign = 'center';
+          ctx.fillText(segment.name, textRadius, 0); // Position the text
+          ctx.restore();
+
+
+          ctx.restore(); // Restore the transformation matrix
+      });
+
+      // Draw the white disk in the center
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      ctx.stroke(); // Optional: Add a stroke to the disk
+    }
+
+    spinButton.addEventListener('click', () => {
+      if (names.length === 0) {
+        alert("Please add names to the list before spinning.");
+        return;
+      }
+      if (!spinning) {
+         playSpinSound();
+        // Reset the highlighted segment before spinning again
+        highlightedSegment = null;
+        spin();
+      }
+    });
+
+    function spin() {
+        spinning = true;
+      nameListContainer.classList.add('spinning-hide');
+        addNameListContainer.classList.add('spinning-hide');
+        let rotations = 7 + Math.random() * 1; // Increased rotations
+        let spinDuration = 10000; // Duration fixed at 10 seconds
+
+        // Calculate random winner index
+        const winningIndex = Math.floor(Math.random() * names.length);
+        const winningName = names[winningIndex]; // Get the winner's name
+
+        let startTimestamp = null;
+        let initialRotationAngle = rotationAngle; // Store the starting angle
+
+          function easeInOutCubic(t) {
+            return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+              
+              
+          }
+
+        function animationStep(timestamp) {
+            if (!startTimestamp) startTimestamp = timestamp;
+            let progress = timestamp - startTimestamp;
+            let time = Math.min(progress / spinDuration, 1); // Normalize time to 0-1 range
+
+            // Use a combined ease-in-out function
+            let easedTime = easeInOutCubic(time);
+
+
+            // Calculate the rotation angle
+            rotationAngle = initialRotationAngle + (rotations * 2 * Math.PI * easedTime);
+            drawWheel(rotationAngle); // Redraw the wheel with the rotation
+
+            if (progress < spinDuration) {
+              requestAnimationFrame(animationStep);
+            } else {
+              // Stop spinning after the animation is complete
+              spinning = false;
+
+              // Calculate the final stopping position and display the winner
+              let finalRotation = rotationAngle % (2 * Math.PI);
+              //Find landing segment
+
+              newWinnerTemplate.querySelector('.winnerName').textContent = winningName;
+              newWinnerTemplate.classList.add('show');
+
+              // Show the original template
+              
+
+              // Hide the template after 1 second
+                            // Hide the template after 3 second
+              
+              
+
+              highlightedSegment = winningIndex; // Highlight the winning segment
+
+              drawWheel(rotationAngle); // Redraw the wheel one last time to show the highlighted segment
+              setTimeout(() => {
+                document.querySelector('#winnerTemplate .winnerName').textContent = winningName;
+                winnerTemplate.classList.add('show');}, 1000);
+
+                // Hide the template after 3 second
+                setTimeout(() => {
+                    winnerTemplate.classList.remove('show');
+                }, 3000);
+               nameListContainer.classList.remove('spinning-hide');
+                addNameListContainer.classList.remove('spinning-hide');
+
+       
+              // Trigger the confetti effect
+              jsConfetti.addConfetti({
+                emojis: [],
+                emojiSize: 30,
+                confettiNumber: 100,
+                confettiRadius: 10,
+                // Increase speed
+                speed:600,
+                // Decrease gravity
+                gravity: 0.2,
+                //Wider Angle
+                angle: 10
+              });
+            }
+          }
+        requestAnimationFrame(animationStep);
+    }
+
+     // Resize the canvas when the window resizes
+    window.addEventListener('resize', () => {
+        drawWheel(rotationAngle); // Redraw the wheel on resize
+    });
+
+
+    // Initialize the wheel when the page loads
+    initializeWheel();
+
+  </script>
+</body>
+</html>
